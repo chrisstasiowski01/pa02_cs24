@@ -17,7 +17,7 @@ class Movies{
     void highestRating(string prefix); // prints movie name and rating for best movie with given prefix
     bool contains(string name) const; // returns true if BST contains given movie name
     int containsPrefix(string prefix); // returns number of movies with given prefixes
-
+    void createTree(string filename); // reads lines from file and inputs into BST
   private:
     struct Node{
       string name;

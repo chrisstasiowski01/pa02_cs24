@@ -3,6 +3,7 @@
 
 #include "movies.h"
 
+#include <fstream>
 #include <string>
 #include <iostream>
 using namespace std;
@@ -80,4 +81,31 @@ bool Movies::contains(string name) const{
     }
   }
   return false;
+}
+
+void Movies::createTree(string filename){
+  ifstream file;
+  string line;
+  file.open(filename);
+  while(1){
+    getline(file, line);
+    if(!file){
+      break;
+    }
+    string mName = "";
+    int comma = 0;
+    for(int i = 0; line[i] != ','; i++){
+      mName = mName + line[i];
+      comma++;
+    }
+    comma++;
+    string mRatingString = "";
+    for(int i = comma; i < line.length(); i++){
+      mRatingString = mRatingString + line[i];
+    }
+    double mRating = stod(mRatingString);
+    insert(mName, mRating);
+  }
+  file.close();
+  return;
 }
