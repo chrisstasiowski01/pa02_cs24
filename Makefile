@@ -9,6 +9,7 @@ runMovies: main.o movies.o
 
 tests: tests.o movies.o
 	g++ $(CXX_FLAG) -o tests tests.o movies.o
+	./tests
 
 movies.o: movies.cpp
 	g++ -c $(CXX_FLAG) movies.cpp

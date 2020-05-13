@@ -5,8 +5,6 @@
 #include <iostream>
 #include <string>
 
-using namespace std;
-
 void test_insert();
 void test_highest_rating();
 void test_contains();
