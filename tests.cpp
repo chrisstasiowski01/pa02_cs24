@@ -8,6 +8,8 @@ int main(){
   test_create_tree();
   test_insert();
   test_contains();
+  test_contains_prefix();
+  test_highest_rating();
   return 0;
 }
 
@@ -64,4 +66,49 @@ void test_contains(){
     cout << "FAILED" << endl;
   }
   cout << "END CONTAINS TEST" << endl << endl;
+}
+
+void test_contains_prefix(){
+  cout << "BEGIN CONTAINS PREFIX TEST" << endl << "Test 1: ";
+  Movies testTree;
+  testTree.createTree("test3.csv");
+  if(testTree.containsPrefix("the") == 3){
+    cout << "PASSED" << endl;
+  }else{
+    cout << "FAILED" << endl;
+  }
+  cout << "Test 2: ";
+  if(testTree.containsPrefix("last") == 1){
+    cout << "PASSED" << endl;
+  }else{
+    cout << "FAILED" << endl;
+  }
+  cout << "Test 3: ";
+  if(testTree.containsPrefix("th") == 4){
+    cout << "PASSED" << endl;
+  }else{
+    cout << "FAILED" << endl;
+  }
+  cout << "Test 4: ";
+  if(testTree.containsPrefix("z") == 0){
+    cout << "PASSED" << endl;
+  }else{
+    cout << "FAILED" << endl;
+  }
+  cout << "END CONTAINS PREFIX TEST" << endl << endl;
+}
+
+void test_highest_rating(){
+  cout << "BEGIN HIGHEST RATING TEST" << endl;
+  Movies testTree;
+  testTree.createTree("test3.csv");
+  cout << "Test 1:" << endl << "Expected: Best movie is the white balloon with rating 7.5"
+    << endl << "Actual: ";
+  testTree.highestRating("the");
+  cout << endl << "Test 2:" << endl << "Expected: Best movie is bottle rocket with rating 6.8"
+    << endl << "Actual: ";
+    Movies testTree2;
+    testTree2.createTree("test4.csv");
+    testTree2.highestRating("b");
+    cout << "END HIGHEST RATING TEST" << endl << endl;
 }

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 // constructor sets up empty BST
@@ -108,4 +109,55 @@ void Movies::createTree(string filename){
   }
   file.close();
   return;
+}
+
+int Movies::containsPrefix(string prefix){
+  return containsPreHelper(prefix, root);
+}
+
+bool Movies::containsPrefixHelper(string prefix, Node *check){
+  for(int i = 0; i < prefix.length(); i++){
+    if(prefix[i] != check->name[i]){
+      return false;
+    }
+  }
+  return true;
+}
+
+int Movies::containsPreHelper(string prefix, Node* n){
+  if(!n){
+    return 0;
+  }else if(containsPrefixHelper(prefix, n) == true){
+    return (1 + containsPreHelper(prefix, n->left) + containsPreHelper(prefix, n->right));
+  }else{
+    return (0 + containsPreHelper(prefix, n->left) + containsPreHelper(prefix, n->right));
+  }
+}
+
+void Movies::highestRating(string prefix){
+  vector<string> vec;
+  vector<double> rat;
+  highestRatingHelper(prefix, root, vec, rat);
+  int maxRating = 0;
+  string maxName = "";
+  for(int i = 0; i < rat.size(); i++){
+    cout << rat[i] << " ";
+    if(maxRating < rat[i]){
+      maxRating = rat[i];
+      maxName = vec[i];
+    }
+  }
+  cout << "Best movie is " << maxName << " with rating " << maxRating << endl;
+}
+
+void Movies::highestRatingHelper(string prefix, Node* n, vector<string> names, vector<double> ratings){
+  if(!n){
+    return;
+  }
+  if(containsPrefixHelper(prefix, n) == true){
+    names.push_back(n->name);
+    ratings.push_back(n->rating);
+  }
+  highestRatingHelper(prefix, n->left, names, ratings);
+  highestRatingHelper(prefix, n->right, names, ratings);
 }
