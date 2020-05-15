@@ -110,5 +110,10 @@ void test_highest_rating(){
     Movies testTree2;
     testTree2.createTree("test4.csv");
     testTree2.highestRating("b");
+  cout << endl << "Test 3:" << endl << "Expected: Best movie is casino with rating 7.8"
+    << endl << "Actual: ";
+    Movies testTree3;
+    testTree3.createTree("test5.csv");
+    testTree3.highestRating("c");
     cout << "END HIGHEST RATING TEST" << endl << endl;
 }

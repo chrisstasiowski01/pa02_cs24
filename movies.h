@@ -34,7 +34,7 @@ class Movies{
     bool insertHelper(std::string mName, double mRating, Node* n); // helper for insert function
     void printPreOHelper(Node* n) const; // helper for printPreO function
     int containsPreHelper(std::string prefix, Node *n);
-    void highestRatingHelper(std::string prefix, Node *n, std::vector<std::string> names, std::vector<double> ratings);
+    void highestRatingHelper(std::string prefix, Node *n, std::vector<std::string> &names, std::vector<double> &ratings);
 };
 
 #endif

@@ -137,20 +137,23 @@ int Movies::containsPreHelper(string prefix, Node* n){
 void Movies::highestRating(string prefix){
   vector<string> vec;
   vector<double> rat;
+
   highestRatingHelper(prefix, root, vec, rat);
-  int maxRating = 0;
+
+  double maxRating = 0;
   string maxName = "";
+
   for(int i = 0; i < rat.size(); i++){
-    cout << rat[i] << " ";
     if(maxRating < rat[i]){
       maxRating = rat[i];
       maxName = vec[i];
     }
   }
+
   cout << "Best movie is " << maxName << " with rating " << maxRating << endl;
 }
 
-void Movies::highestRatingHelper(string prefix, Node* n, vector<string> names, vector<double> ratings){
+void Movies::highestRatingHelper(string prefix, Node* n, vector<string> &names, vector<double> &ratings){
   if(!n){
     return;
   }
