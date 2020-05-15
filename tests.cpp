@@ -10,6 +10,7 @@ int main(){
   test_contains();
   test_contains_prefix();
   test_highest_rating();
+  test_depth();
   return 0;
 }
 
@@ -116,4 +117,28 @@ void test_highest_rating(){
     testTree3.createTree("test5.csv");
     testTree3.highestRating("c");
     cout << "END HIGHEST RATING TEST" << endl << endl;
+}
+
+void test_depth(){
+  cout << "BEGIN DEPTH TEST" << endl << "Test 1: ";
+  Movies testTree;
+  testTree.createTree("test3.csv");
+  if(testTree.depth("the crossing guard") == 0){
+    cout << "PASSED" << endl;
+  }else{
+    cout << "FAILED" << endl;
+  }
+  cout << "Test 2: ";
+  if(testTree.depth("once upon a time... when we were colored") == 2){
+    cout << "PASSED" << endl;
+  }else{
+    cout << "FAILED" << endl;
+  }
+  cout << "Test 3: ";
+  if(testTree.depth("last summer in the hamptons") == 3){
+    cout << "PASSED" << endl;
+  }else{
+    cout << "FAILED" << endl;
+  }
+  cout << "END DEPTH TEST" << endl << endl;
 }

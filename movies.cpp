@@ -164,3 +164,20 @@ void Movies::highestRatingHelper(string prefix, Node* n, vector<string> &names, 
   highestRatingHelper(prefix, n->left, names, ratings);
   highestRatingHelper(prefix, n->right, names, ratings);
 }
+
+int Movies::depth(string movie){
+  Node *n = root;
+  int depth = 0;
+  while(n){
+    if(n->name == movie){
+      return depth;
+    }else if(n->name < movie){
+      n = n->right;
+      depth++;
+    }else{
+      n = n->left;
+      depth++;
+    }
+  }
+  return 0;
+}

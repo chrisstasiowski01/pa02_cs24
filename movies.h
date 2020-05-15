@@ -19,6 +19,8 @@ class Movies{
     bool contains(std::string name) const; // returns true if BST contains given movie name
     int containsPrefix(std::string prefix); // returns number of movies in BST with given prefix
     void createTree(std::string filename); // reads lines from file and inputs into BST
+    int depth(std::string movie); // returns depth of node with given movie
+    void printPreODepth() const; // prints BST pre-order with node depth
   private:
     struct Node{
       std::string name;
