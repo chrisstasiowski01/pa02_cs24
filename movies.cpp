@@ -181,3 +181,16 @@ int Movies::depth(string movie){
   }
   return 0;
 }
+
+void Movies::printPreODepth(){
+  printPreODepthHelper(root);
+}
+
+void Movies::printPreODepthHelper(Node *n){
+  if(n){
+    cout << n->name << ", " << n->rating << ", " << depth(n->name) << endl;
+    printPreODepthHelper(n->left);
+    printPreODepthHelper(n->right);
+  }
+}
+

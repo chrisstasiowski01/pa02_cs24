@@ -11,6 +11,7 @@ int main(){
   test_contains_prefix();
   test_highest_rating();
   test_depth();
+  test_print_preorder_depth();
   return 0;
 }
 
@@ -141,4 +142,24 @@ void test_depth(){
     cout << "FAILED" << endl;
   }
   cout << "END DEPTH TEST" << endl << endl;
+}
+
+void test_print_preorder_depth(){
+  cout << "BEGIN PRINT PREORDER W/ DEPTH TEST" << endl << "Test 1:"
+    << endl << "Expected:" << endl;
+  Movies testTree;
+  testTree.createTree("test3.csv");
+  cout << "the crossing guard, 6.1, 0" << endl << "antonia'sline, 7.2, 1"
+    << endl << "once upon a time... when we were colored, 4.5, 2" << endl
+    << "last summer in the hamptons, 0, 3" << endl << "the juror, 5.5, 1"
+    << endl << "the white balloon, 7.5, 2" << endl << "things to do in denver when you're dead, 6.7, 3"
+    << endl << "Actual:" << endl;
+  testTree.printPreODepth();
+  Movies testTree2;
+  testTree2.createTree("test2.csv");
+  cout << "Test 2:" << endl << "Expected:" << endl << "dead presidents, 6.6, 0"
+    << endl << "restoration, 6.3, 1" << endl << "mortal kombat, 5.4, 2" << endl
+    << "to die for, 6.7, 2" << endl << "Actual:" << endl;
+  testTree2.printPreODepth();
+  cout << "END PRINT PREORDER W/ DEPTH TEST" << endl << endl;
 }

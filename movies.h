@@ -20,7 +20,7 @@ class Movies{
     int containsPrefix(std::string prefix); // returns number of movies in BST with given prefix
     void createTree(std::string filename); // reads lines from file and inputs into BST
     int depth(std::string movie); // returns depth of node with given movie
-    void printPreODepth() const; // prints BST pre-order with node depth
+    void printPreODepth(); // prints BST pre-order with node depth
   private:
     struct Node{
       std::string name;
@@ -37,6 +37,7 @@ class Movies{
     void printPreOHelper(Node* n) const; // helper for printPreO function
     int containsPreHelper(std::string prefix, Node *n);
     void highestRatingHelper(std::string prefix, Node *n, std::vector<std::string> &names, std::vector<double> &ratings);
+    void printPreODepthHelper(Node *n);
 };
 
 #endif
