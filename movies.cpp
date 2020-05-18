@@ -159,6 +159,9 @@ int Movies::containsPreHelper(string prefix, Node* n){
 }
 
 void Movies::highestRating(string prefix){
+  if(containsPrefix(prefix) == 0){
+    return;
+  }
   vector<string> vec;
   vector<double> rat;
 
