@@ -94,6 +94,29 @@ void Movies::createTree(string filename){
       break;
     }
     string mName = "";
+    bool flag = false;
+    string tempRating = "";
+    double mRating = 0.0;
+    for(int i = 0; i < line.length(); i++){
+      if(flag){
+        tempRating += line[i];
+      }else if((line[i] == ',') && (line[0] != '"')){
+        flag = true;
+      }else{
+        if(i == 0 && line[0] == '"'){
+          continue;
+        }
+        if(line[i] == '"'){
+          i++;
+          flag = true;
+          continue;
+        }
+        mName += line[i];
+      }
+    }
+    mRating = stod(tempRating);
+
+    /*
     int comma = 0;
     for(int i = 0; line[i] != ','; i++){
       mName = mName + line[i];
@@ -105,6 +128,7 @@ void Movies::createTree(string filename){
       mRatingString = mRatingString + line[i];
     }
     double mRating = stod(mRatingString);
+    */
     insert(mName, mRating);
   }
   file.close();
