@@ -26,6 +26,7 @@ void Movies::clear(Node* r){
   }
 }
 
+// inserts node into BST
 bool Movies::insert(string mName, double mRating){
   if(!root){
     root = new Node(mName, mRating);
@@ -35,6 +36,7 @@ bool Movies::insert(string mName, double mRating){
   }
 }
 
+// helper function for insert()
 bool Movies::insertHelper(string mName, double mRating, Node* n){
   if(mName == n->name){
     return false;
@@ -58,10 +60,12 @@ bool Movies::insertHelper(string mName, double mRating, Node* n){
   }
 }
 
+// prints movies of BST in pre-order
 void Movies::printPreO() const{
   printPreOHelper(root);
 }
 
+// helper for printPreO()
 void Movies::printPreOHelper(Node* n) const{
   if(n){
     cout << n->name << ", " << n->rating << endl;
@@ -70,6 +74,7 @@ void Movies::printPreOHelper(Node* n) const{
   }
 }
 
+// returns true if a movie with desired name is in BST, otherwise returns false
 bool Movies::contains(string name) const{
   Node *n = root;
   while(n){
@@ -84,6 +89,7 @@ bool Movies::contains(string name) const{
   return false;
 }
 
+// takes input file and uses insert() to create BST
 void Movies::createTree(string filename){
   ifstream file;
   string line;
@@ -121,10 +127,12 @@ void Movies::createTree(string filename){
   return;
 }
 
+// returns number of movies in BST that contain desired prefix
 int Movies::containsPrefix(string prefix){
   return containsPreHelper(prefix, root);
 }
 
+// returns true if node contains movie with desired prefix, else returns false
 bool Movies::containsPrefixHelper(string prefix, Node *check){
   for(int i = 0; i < prefix.length(); i++){
     if(prefix[i] != check->name[i]){
@@ -134,6 +142,7 @@ bool Movies::containsPrefixHelper(string prefix, Node *check){
   return true;
 }
 
+// recursive helper for containsPrefix()
 int Movies::containsPreHelper(string prefix, Node* n){
   if(!n){
     return 0;
@@ -144,6 +153,7 @@ int Movies::containsPreHelper(string prefix, Node* n){
   }
 }
 
+// prints best movie and rating with desired prefix
 void Movies::highestRating(string prefix){
   if(containsPrefix(prefix) == 0){
     return;
@@ -166,6 +176,7 @@ void Movies::highestRating(string prefix){
   cout << "Best movie is " << maxName << " with rating " << maxRating << endl;
 }
 
+// helper for highestRating()
 void Movies::highestRatingHelper(string prefix, Node* n, vector<string> &names, vector<double> &ratings){
   if(!n){
     return;
@@ -178,6 +189,7 @@ void Movies::highestRatingHelper(string prefix, Node* n, vector<string> &names, 
   highestRatingHelper(prefix, n->right, names, ratings);
 }
 
+// returns depth of node with desired movie
 int Movies::depth(string movie){
   Node *n = root;
   int depth = 0;
@@ -195,10 +207,12 @@ int Movies::depth(string movie){
   return 0;
 }
 
+// prints every movie in BST with rating and depth
 void Movies::printPreODepth(){
   printPreODepthHelper(root);
 }
 
+// helper for printPreODepth()
 void Movies::printPreODepthHelper(Node *n){
   if(n){
     cout << n->name << ", " << n->rating << ", " << depth(n->name) << endl;
@@ -207,6 +221,7 @@ void Movies::printPreODepthHelper(Node *n){
   }
 }
 
+// prints run-time data in ms for contains()
 void Movies::containsData(int w){
   vector<double> time;
   for(int i = 0; i < w; i++){
@@ -219,6 +234,7 @@ void Movies::containsData(int w){
   cout << "Median (ms): " << time[(time.size()-1)/2] << endl;
 }
 
+// helper for containsData()
 void Movies::containsDataHelper(Node* n, vector<double> &t){
   if(!n){
     return;
@@ -242,7 +258,7 @@ int Movies::insertData(string mName, double mRating){
   }
 }
 
-// returns number of nodes visited
+// recursive helper for insertData()
 int Movies::insertHelperData(string mName, double mRating, Node* n){
   if(mName == n->name){
     return 1;
@@ -266,6 +282,7 @@ int Movies::insertHelperData(string mName, double mRating, Node* n){
   }
 }
 
+// creates output file with two columns: N and N_visited when creating a BST
 void Movies::createTreeData(string filename){
   ifstream file;
   ofstream output;

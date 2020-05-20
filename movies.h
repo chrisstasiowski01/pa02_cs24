@@ -8,9 +8,7 @@
 #include <vector>
 #include <fstream>
 
-
 class Movies{
-
   public:
     Movies(); // constructor
     ~Movies(); // destructor
@@ -35,10 +33,11 @@ class Movies{
     Node *root;
     Node* getNodeFor(std::string search); // returns pointer to node of BST with given movie name
     int nodeDepth(Node* getDepth); // returns depth of given node
-    bool containsPrefixHelper(std::string prefix, Node *check); // returns true if node contains movie name with given prefix
-    void clear(Node* r); // helper for public destructor
-    bool insertHelper(std::string mName, double mRating, Node* n); // helper for insert function
-    void printPreOHelper(Node* n) const; // helper for printPreO function
+    // helper functions (used to access nodes)
+    bool containsPrefixHelper(std::string prefix, Node *check);
+    void clear(Node* r);
+    bool insertHelper(std::string mName, double mRating, Node* n);
+    void printPreOHelper(Node* n) const;
     int containsPreHelper(std::string prefix, Node *n);
     void highestRatingHelper(std::string prefix, Node *n, std::vector<std::string> &names, std::vector<double> &ratings);
     void printPreODepthHelper(Node *n);
