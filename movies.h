@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 
 class Movies{
@@ -21,6 +22,9 @@ class Movies{
     void createTree(std::string filename); // reads lines from file and inputs into BST
     int depth(std::string movie); // returns depth of node with given movie
     void printPreODepth(); // prints BST pre-order with node depth
+    void containsData(int w); // collects data for absolute running time of contains function
+    int insertData(std::string mName, double mRating);
+    void createTreeData(std::string filename); // writes N and N-visited to csv file
   private:
     struct Node{
       std::string name;
@@ -38,6 +42,8 @@ class Movies{
     int containsPreHelper(std::string prefix, Node *n);
     void highestRatingHelper(std::string prefix, Node *n, std::vector<std::string> &names, std::vector<double> &ratings);
     void printPreODepthHelper(Node *n);
+    void containsDataHelper(Node* n, std::vector<double> &t);
+    int insertHelperData(std::string mName, double mRating, Node* n);
 };
 
 #endif

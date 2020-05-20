@@ -115,20 +115,6 @@ void Movies::createTree(string filename){
       }
     }
     mRating = stod(tempRating);
-
-    /*
-    int comma = 0;
-    for(int i = 0; line[i] != ','; i++){
-      mName = mName + line[i];
-      comma++;
-    }
-    comma++;
-    string mRatingString = "";
-    for(int i = comma; i < line.length(); i++){
-      mRatingString = mRatingString + line[i];
-    }
-    double mRating = stod(mRatingString);
-    */
     insert(mName, mRating);
   }
   file.close();
@@ -221,3 +207,105 @@ void Movies::printPreODepthHelper(Node *n){
   }
 }
 
+void Movies::containsData(int w){
+  vector<double> time;
+  for(int i = 0; i < w; i++){
+    containsDataHelper(root, time);
+  }
+  sort(time.begin(), time.end());
+  cout << "Number of runs: " << w << endl;
+  cout << "Minimum time (ms): " << *min_element(time.begin(), time.end()) << endl;
+  cout << "Maximum time (ms): " << *max_element(time.begin(), time.end()) << endl;
+  cout << "Median (ms): " << time[(time.size()-1)/2] << endl;
+}
+
+void Movies::containsDataHelper(Node* n, vector<double> &t){
+  if(!n){
+    return;
+  }
+  clock_t start, end;
+  start = clock();
+  contains(n->name);
+  end = clock();
+  double time_taken = ((double(end - start)/double(CLOCKS_PER_SEC))*1000000);
+  t.push_back(time_taken);
+  containsDataHelper(n->left, t);
+  containsDataHelper(n->right, t);
+}
+// returns number of nodes visited
+int Movies::insertData(string mName, double mRating){
+  if(!root){
+    root = new Node(mName, mRating);
+    return 0;
+  }else{
+    return insertHelperData(mName, mRating, root);
+  }
+}
+
+// returns number of nodes visited
+int Movies::insertHelperData(string mName, double mRating, Node* n){
+  if(mName == n->name){
+    return 1;
+  }
+  if(mName < n->name){
+    if(n->left){
+      return (1+insertHelperData(mName, mRating, n->left));
+    }else{
+      n->left = new Node(mName, mRating);
+      n->left->parent = n;
+      return 1;
+    }
+  }else{
+    if(n->right){
+      return (1+insertHelperData(mName, mRating, n->right));
+    }else{
+      n->right = new Node(mName, mRating);
+      n->right->parent = n;
+      return 1;
+    }
+  }
+}
+
+void Movies::createTreeData(string filename){
+  ifstream file;
+  ofstream output;
+  output.open("createTreeData.csv");
+  string line;
+  file.open(filename);
+  int n = 0;
+  int n_visited = 0;
+  while(1){
+    getline(file, line);
+    if(!file){
+      break;
+    }
+    string mName = "";
+    bool flag = false;
+    string tempRating = "";
+    double mRating = 0.0;
+    for(int i = 0; i < line.length(); i++){
+      if(flag){
+        tempRating += line[i];
+      }else if((line[i] == ',') && (line[0] != '"')){
+        flag = true;
+      }else{
+        if(i == 0 && line[0] == '"'){
+          continue;
+        }
+        if(line[i] == '"'){
+          i++;
+          flag = true;
+          continue;
+        }
+        mName += line[i];
+      }
+    }
+    mRating = stod(tempRating);
+    n_visited = insertData(mName, mRating);
+    output << n << "," << n_visited << endl;
+    n++;
+  }
+  output.close();
+  file.close();
+  return;
+}
