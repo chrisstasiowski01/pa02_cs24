@@ -4,6 +4,7 @@
 #ifndef MOVIES_H
 #define MOVIES_H
 
+#include <algorithm>
 #include <iostream>
 #include <vector>
 #include <fstream>
